@@ -1,0 +1,48 @@
+# Install Git (if not installed)
+sudo apt install git -y   # For Ubuntu
+# or install from https://git-scm.com/downloads for Windows
+
+# Install cURL
+sudo apt install curl -y
+
+# Install Docker
+sudo apt install docker.io -y
+sudo systemctl start docker
+sudo systemctl enable docker
+
+# Install Docker Compose (if needed separately)
+sudo apt install docker-compose -y
+
+
+
+# Download Fabric installation script
+curl -sSLO https://raw.githubusercontent.com/hyperledger/fabric/main/scripts/install-fabric.sh
+
+# Make it executable
+chmod +x install-fabric.sh
+
+# Install Fabric binaries, Docker images, and samples
+./install-fabric.sh docker samples binary
+
+
+
+# Go to the test network directory
+cd fabric-samples/test-network
+
+# Start the network
+./network.sh up
+
+
+
+# Create a new channel
+./network.sh createChannel
+
+# Deploy chaincode (smart contract)
+./network.sh deployCC
+
+
+
+docker ps -a
+
+
+./network.sh down
